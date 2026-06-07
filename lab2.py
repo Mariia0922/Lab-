@@ -1,72 +1,76 @@
-def multiply_matrices(A, B):
-    if not A or not B:
-        raise ValueError("Матриці не можуть бути порожніми")
+class MatrixCalculator:
+    def multiply_matrices(self, A, B):
+        if not A or not B or not A[0] or not B[0]:
+            raise ValueError("Матриці не можуть бути порожніми або мати порожні рядки")
 
-    if len(A[0]) != len(B):
-        raise ValueError("Матриці неможливо перемножити")
+        if len(A[0]) != len(B):
+            raise ValueError("Матриці неможливо перемножити")
 
-    C = []
+        C = []
 
-    for i in range(len(A)):
-        row = []
-        for j in range(len(B[0])):
-            element = 0.0
+        for i in range(len(A)):
+            row = []
 
-            for k in range(len(B)):
-                element += A[i][k] * B[k][j]
+            for j in range(len(B[0])):
+                element = 0.0
 
-            row.append(element)
+                for k in range(len(B)):
+                    element += A[i][k] * B[k][j]
 
-        C.append(row)
+                row.append(element)
 
-    return C
+            C.append(row)
 
+        return C
 
-def sum_max_elements_in_rows(matrix):
-    total = 0.0
+    def sum_max_elements_in_rows(self, matrix):
+        total = 0.0
 
-    for row in matrix:
-        total += max(row)
+        for row in matrix:
+            if not row:
+                raise ValueError("Рядок матриці C не може бути порожнім")
 
-    return total
+            total += max(row)
 
+        return total
 
-def print_matrix(matrix):
-    for row in matrix:
-        for element in row:
-            print(f"{element:8.2f}", end=" ")
-        print()
+    def print_matrix(self, matrix):
+        for row in matrix:
+            for element in row:
+                print(f"{element:8.2f}", end=" ")
+            print()
 
+    def main(self):
+        try:
+            A = [
+                [1.0, 2.0],
+                [3.0, 4.0]
+            ]
 
-def main():
-    try:
-        A = [
-            [1.0, 2.0],
-            [3.0, 4.0]
-        ]
+            B = [
+                [5.0, 6.0],
+                [7.0, 8.0]
+            ]
 
-        B = [
-            [5.0, 6.0],
-            [7.0, 8.0]
-        ]
+            C = self.multiply_matrices(A, B)
 
-        C = multiply_matrices(A, B)
-        result = sum_max_elements_in_rows(C)
+            result = self.sum_max_elements_in_rows(C)
 
-        print("Матриця A:")
-        print_matrix(A)
+            print("Матриця A:")
+            self.print_matrix(A)
 
-        print("\nМатриця B:")
-        print_matrix(B)
+            print("\nМатриця B:")
+            self.print_matrix(B)
 
-        print("\nМатриця C = A × B:")
-        print_matrix(C)
+            print("\nМатриця C = A × B:")
+            self.print_matrix(C)
 
-        print("\nСума найбільших елементів кожного рядка матриці C =", result)
+            print("\nСума найбільших елементів кожного рядка матриці C =", result)
 
-    except ValueError as e:
-        print("Помилка:", e)
+        except ValueError as e:
+            print("Помилка:", e)
 
 
 if __name__ == "__main__":
-    main()
+    calculator = MatrixCalculator()
+    calculator.main()
