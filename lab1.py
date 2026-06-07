@@ -33,4 +33,5 @@ class Calculator:
 
 
 if __name__ == "__main__":
-    Calculator.main()
+    calculator = Calculator()
+    calculator.main()
