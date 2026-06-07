@@ -1,34 +1,33 @@
-def main():
-    try:
-        text = input("Введіть текст: ")
+class TextProcessor:
+    def main(self):
+        try:
+            text = input("Введіть текст: ")
 
-        if not text.strip():
-            raise ValueError("Текст не може бути порожнім")
+            if not text.strip():
+                raise ValueError("Текст не може бути порожнім")
 
-        words = text.split()
-        result = []
+            words = text.split()
+            result = []
 
-        for word in words:
-            if len(word) == 0:
-                continue
+            for word in words:
+                new_word = word[0]
 
-            new_word = word[0]
+                for char in word[1:]:
+                    if char.lower() != word[0].lower():
+                        new_word += char
 
-            for char in word[1:]:
-                if char.lower() != word[0].lower():
-                    new_word += char
+                result.append(new_word)
 
-            result.append(new_word)
+            print("\nРезультат:")
+            print(" ".join(result))
 
-        print("\nРезультат:")
-        print(" ".join(result))
+        except ValueError as e:
+            print("Помилка:", e)
 
-    except ValueError as e:
-        print("Помилка:", e)
-
-    except Exception as e:
-        print("Непередбачена помилка:", e)
+        except Exception as e:
+            print("Непередбачена помилка:", e)
 
 
 if __name__ == "__main__":
-    main()
+    processor = TextProcessor()
+    processor.main()
