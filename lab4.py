@@ -7,7 +7,7 @@ class Boat:
         self.year = year
 
 class BoatManager:
-    def execute(self):
+    def main(self):
         try:
             boats = [
                 Boat("Atlantic", 25, 30, 8, 2018),
@@ -61,4 +61,4 @@ class BoatManager:
 
 if __name__ == "__main__":
     manager = BoatManager()
-    manager.execute()
+    manager.main()
